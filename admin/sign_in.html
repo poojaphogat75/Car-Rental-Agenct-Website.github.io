@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign In Admin</title>
+		<!-- link to Bootstrap minified css-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- link to Jquery minified-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- link to Bootstrap JS -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- link to external CSS -->
+		<link rel="stylesheet" type="text/css" href="index.css">
+	
+<script language="javascript">
+function validate_form() 
+{
+  if( document.sign_in.username.value == "" ) 
+	{
+            alert( "Please provide UserName!" );
+            document.sign_in.username.focus() ;
+            return false;
+	}
+	if( document.sign_in.pass.value == "" ) 
+	{
+            alert( "Please provide password!" );
+            document.sign_in.pass.focus() ;
+            return false;
+	}
+  return true;
+}
+</script>
+</head>
+<body>
+	<?php
+
+$conn = mysqli_connect("localhost", "root", "", "carrent");
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM car_agency";
+$result=mysqli_query($conn,$sql);
+
+if (!$result)
+	die(mysql_error());
+
+?>
+<center><form name="sign_in" action="" onsubmit="return validate_form()" method="post"><table>
+	<tr>
+		<td><label>USERNAME</label></td>
+	</tr>
+	<tr>
+		<td><input type="email" name="username" id="user"></td>
+	</tr>
+	<tr>
+		<td><label>PASSWORD</label></td>
+	</tr>
+	<tr>
+		<td><input type="password" name="pass" id="pswd"></td>
+	</tr>
+</table>
+	<button type="submit" name="login">LOGIN</button>
+</form>
+<p><a href="CarRentalAgency.html">Back to Home</a></p>
+</center>
+</body>
+</html>
